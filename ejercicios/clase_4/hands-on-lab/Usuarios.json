@@ -1,0 +1,20 @@
+[
+  {
+    "nombre": "Juan",
+    "apellido": "Perez",
+    "edad": 25,
+    "curso": "Fullstack"
+  },
+  {
+    "nombre": "Juan",
+    "apellido": "Perez",
+    "edad": 25,
+    "curso": "Fullstack"
+  },
+  {
+    "nombre": "Juan",
+    "apellido": "Perez",
+    "edad": 25,
+    "curso": "Fullstack"
+  }
+]
