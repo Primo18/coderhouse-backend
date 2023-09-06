@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Desafío 3 - Curso de Backend - Coderhouse",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "dev": "nodemon src/app.js"
   },

@@ -1,4 +1,4 @@
-const fs = require("node:fs");
+import { readFileSync, writeFileSync } from "node:fs";
 
 class ProductManager {
     constructor() {
@@ -8,7 +8,7 @@ class ProductManager {
 
     loadProducts() {
         try {
-            const data = fs.readFileSync("products.json", "utf8");
+            const data = readFileSync("src/products.json", "utf8");
             this.products = JSON.parse(data);
         } catch {
             throw new Error("Could not load products");
@@ -17,14 +17,13 @@ class ProductManager {
 
     saveProducts() {
         try {
-            fs.writeFileSync("products.json", JSON.stringify(this.products, null, 2));
+            writeFileSync("src/products.json", JSON.stringify(this.products, null, 2));
         } catch {
             throw new Error("Could not save products");
         }
     }
 
     addProduct(title, description, price, thumbnail, code, stock) {
-
         const id = this.products.length + 1;
 
         if (!title || !description || !price || !thumbnail || !code || !stock) {
@@ -94,19 +93,4 @@ class ProductManager {
     }
 }
 
-const productManager = new ProductManager();
-
-const products = productManager.getProducts();
-console.log(products);
-
-productManager.addProduct("Product 1", "Description 1", 100, "Thumbnail 1", "Code 1", 10);
-productManager.addProduct("Product 2", "Description 2", 200, "Thumbnail 2", "Code 2", 20);
-productManager.addProduct("Product 3", "Description 3", 300, "Thumbnail 3", "Code 3", 30);
-
-const product = productManager.getProductById(1);
-console.log(product);
-
-productManager.updateProduct(2, "Product 2 updated", null, null, null, null, null);
-
-productManager.deleteProduct(3);
-
+export default ProductManager;
