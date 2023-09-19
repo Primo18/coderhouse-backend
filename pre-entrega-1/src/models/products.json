@@ -1,0 +1,30 @@
+[
+    {
+        "id": 1,
+        "title": "Manzana",
+        "description": "Manzana roja fresca",
+        "code": "MAN001",
+        "price": 1.5,
+        "status": true,
+        "stock": 100,
+        "category": "Frutas",
+        "thumbnails": [
+            "/images/manzana1.jpg",
+            "/images/manzana2.jpg"
+        ]
+    },
+    {
+        "id": 2,
+        "title": "Banana",
+        "description": "Bananas frescas",
+        "code": "BAN001",
+        "price": 1.0,
+        "status": true,
+        "stock": 150,
+        "category": "Frutas",
+        "thumbnails": [
+            "/images/banana1.jpg",
+            "/images/banana2.jpg"
+        ]
+    }
+]
