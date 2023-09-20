@@ -1,6 +1,6 @@
 [
     {
-        "id": 1,
+        "id": "1",
         "title": "Manzana",
         "description": "Manzana roja fresca",
         "code": "MAN001",
@@ -14,7 +14,7 @@
         ]
     },
     {
-        "id": 2,
+        "id": "2",
         "title": "Banana",
         "description": "Bananas frescas",
         "code": "BAN001",
