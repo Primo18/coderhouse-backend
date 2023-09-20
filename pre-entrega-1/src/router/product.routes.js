@@ -1,42 +1,42 @@
 import { Router } from "express";
 import ProductManager from "../controllers/ProductManager.js";
 
-const ProductRouter = Router()
-const product = new ProductManager();
+const ProductRouter = Router();
+const productManager = new ProductManager();
 
- ProductRouter.get("/", async (req, res) => {
-    res.send(await product.getProducts())
-})
+const validateProductFields = (req, res, next) => {
+    const { name, description, code, price, stock, category } = req.body;
 
- ProductRouter.get("/:id", async (req, res) => {
-    let id = req.params.id
-    res.send(await product.getProductsById(id))
-})
-
- ProductRouter.post("/", async (req, res) => {
-    let newProduct = req.body
-      if (
-        !newProduct.name ||
-        !newProduct.description ||
-        !newProduct.code ||
-        !newProduct.price ||
-        !newProduct.stock ||
-        !newProduct.category) {
+    if (!name || !description || !code || !price || !stock || !category) {
         return res.status(400).json({ error: 'Debe proporcionar todos los campos: name, description, code, price, stock, category, thumbnail (opcional).' });
     }
 
-    res.send(await product.addProducts(newProduct))
-})
+    next();
+};
 
- ProductRouter.put("/:id", async (req, res) => {
-    let id = req.params.id
-    let updateProducts = req.body;
-    res.send(await product.updateProducts(id, updateProducts))
-})
+ProductRouter.get("/", async (req, res) => {
+    res.send(await productManager.getProducts());
+});
 
- ProductRouter.delete("/:id", async (req, res) => {
-    let id = req.params.id
-    res.send(await product.deleteProducts(id))
-})
+ProductRouter.get("/:id", async (req, res) => {
+    const { id } = req.params;
+    res.send(await productManager.getProductsById(id));
+});
 
-export default ProductRouter
+ProductRouter.post("/", validateProductFields, async (req, res) => {
+    const newProduct = req.body;
+    res.send(await productManager.addProducts(newProduct));
+});
+
+ProductRouter.put("/:id", async (req, res) => {
+    const { id } = req.params;
+    const updateProducts = req.body;
+    res.send(await productManager.updateProducts(id, updateProducts));
+});
+
+ProductRouter.delete("/:id", async (req, res) => {
+    const { id } = req.params;
+    res.send(await productManager.deleteProducts(id));
+});
+
+export default ProductRouter;

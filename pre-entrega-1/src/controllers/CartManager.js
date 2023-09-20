@@ -1,4 +1,4 @@
-import {promises as fs} from 'fs';
+import { promises as fs } from 'fs';
 import { nanoid } from 'nanoid';
 import ProductManager from './ProductManager.js';
 
@@ -26,27 +26,27 @@ class CartManager {
     addCarts = async () => {
         let oldCarts = await this.readCarts();
         let id = nanoid()
-        let cartsConcat = [{ id : id, products : []}, ...oldCarts]
+        let cartsConcat = [{ id: id, products: [] }, ...oldCarts]
         await this.writeCarts(cartsConcat)
         return "Carrito agregado"
     }
 
     getCartsById = async (id) => {
         let cartById = await this.exist(id)
-        if(!cartById) return "Carrito no encontrado"
+        if (!cartById) return "Carrito no encontrado"
         return cartById;
     };
 
     addProductToCart = async (cartId, productId) => {
         let cartById = await this.exist(cartId)
-        if(!cartById) return "Carrito no encontrado";
+        if (!cartById) return "Carrito no encontrado";
         let productById = await allProducts.exist(productId)
-        if(!productById) return "Producto no encontrado";
-        
+        if (!productById) return "Producto no encontrado";
+
         let allCarts = await this.readCarts()
         let cartFilter = allCarts.filter(cart => cart.id != cartId)
 
-        if(cartById.products.some((prod) => prod.id === productId)){
+        if (cartById.products.some((prod) => prod.id === productId)) {
             let addProductInCart = cartById.products.find(prod => prod.id === productId)
             addProductInCart.quantity++;
             let cartsConcat = [cartById, ...cartFilter]
@@ -54,7 +54,7 @@ class CartManager {
             return "Producto sumado al carrito";
         }
 
-        cartById.products.push({id:productById.id, quantity: 1})
+        cartById.products.push({ id: productById.id, quantity: 1 })
         let cartsConcat = [cartById, ...cartFilter]
         await this.writeCarts(cartsConcat)
         return "Producto agregado al carrito";
