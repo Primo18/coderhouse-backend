@@ -26,19 +26,5 @@
             "/images/banana1.jpg",
             "/images/banana2.jpg"
         ]
-    },
-    {
-        "name": "Manzana 2",
-        "description": "Manzana roja y jugosa",
-        "code": "PROD123",
-        "price": 1.5,
-        "status": true,
-        "stock": 100,
-        "category": "Frutas",
-        "thumbnails": [
-            "ruta1.jpg",
-            "ruta2.jpg"
-        ],
-        "id": "M6I8pcyGzHZBjhQoZNyxs"
     }
 ]
