@@ -1,7 +1,7 @@
 [
     {
         "id": "1",
-        "title": "Manzana",
+        "name": "Manzana",
         "description": "Manzana roja fresca",
         "code": "MAN001",
         "price": 1.5,
@@ -15,10 +15,10 @@
     },
     {
         "id": "2",
-        "title": "Banana",
+        "name": "Banana",
         "description": "Bananas frescas",
         "code": "BAN001",
-        "price": 1.0,
+        "price": 1,
         "status": true,
         "stock": 150,
         "category": "Frutas",
@@ -26,5 +26,19 @@
             "/images/banana1.jpg",
             "/images/banana2.jpg"
         ]
+    },
+    {
+        "name": "Manzana 2",
+        "description": "Manzana roja y jugosa",
+        "code": "PROD123",
+        "price": 1.5,
+        "status": true,
+        "stock": 100,
+        "category": "Frutas",
+        "thumbnails": [
+            "ruta1.jpg",
+            "ruta2.jpg"
+        ],
+        "id": "M6I8pcyGzHZBjhQoZNyxs"
     }
 ]
