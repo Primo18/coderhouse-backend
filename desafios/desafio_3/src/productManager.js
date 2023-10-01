@@ -1,13 +1,14 @@
 import { readFile, writeFile } from 'fs/promises';
 
 class ProductManager {
-    constructor() {
+    constructor(filePath) {
+        this.filePath = filePath;
         this.products = [];
     }
 
     async loadProducts() {
         try {
-            const data = await readFile('src/products.json', 'utf8');
+            const data = await readFile(this.filePath, 'utf8');
             this.products = JSON.parse(data);
         } catch (error) {
             throw new Error('Could not load products');
@@ -16,11 +17,12 @@ class ProductManager {
 
     async saveProducts() {
         try {
-            await writeFile('src/products.json', JSON.stringify(this.products, null, 2));
+            await writeFile(this.filePath, JSON.stringify(this.products, null, 2));
         } catch (error) {
             throw new Error('Could not save products');
         }
     }
+
 
     async addProduct(title, description, price, thumbnail, code, stock) {
         const id = this.products.length + 1;

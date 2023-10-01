@@ -5,7 +5,7 @@ const app = express();
 const port = process.env.PORT || 8080;
 
 // Crear una instancia de ProductManager
-const productManager = new ProductManager();
+const productManager = new ProductManager('src/products.json');
 
 // Ruta para obtener productos
 app.get('/products', async (req, res) => {
