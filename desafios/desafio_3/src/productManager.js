@@ -1,38 +1,37 @@
-import { readFileSync, writeFileSync } from "node:fs";
+import { readFile, writeFile } from 'fs/promises';
 
 class ProductManager {
     constructor() {
         this.products = [];
-        this.loadProducts();
     }
 
-    loadProducts() {
+    async loadProducts() {
         try {
-            const data = readFileSync("src/products.json", "utf8");
+            const data = await readFile('src/products.json', 'utf8');
             this.products = JSON.parse(data);
-        } catch {
-            throw new Error("Could not load products");
+        } catch (error) {
+            throw new Error('Could not load products');
         }
     }
 
-    saveProducts() {
+    async saveProducts() {
         try {
-            writeFileSync("src/products.json", JSON.stringify(this.products, null, 2));
-        } catch {
-            throw new Error("Could not save products");
+            await writeFile('src/products.json', JSON.stringify(this.products, null, 2));
+        } catch (error) {
+            throw new Error('Could not save products');
         }
     }
 
-    addProduct(title, description, price, thumbnail, code, stock) {
+    async addProduct(title, description, price, thumbnail, code, stock) {
         const id = this.products.length + 1;
 
         if (!title || !description || !price || !thumbnail || !code || !stock) {
-            console.log("All fields are required");
+            console.log('All fields are required');
             return;
         }
 
         if (this.products.find(p => p.code === code)) {
-            console.log("Code already exists");
+            console.log('Code already exists');
             return;
         }
 
@@ -43,18 +42,24 @@ class ProductManager {
             price,
             thumbnail,
             code,
-            stock
+            stock,
         };
         this.products.push(product);
-        this.saveProducts();
-        console.log("Product created");
+        await this.saveProducts();
+        console.log('Product created');
     }
 
-    getProducts() {
+    async getProducts() {
+        if (this.products.length === 0) {
+            await this.loadProducts();
+        }
         return this.products;
     }
 
-    getProductById(id) {
+    async getProductById(id) {
+        if (this.products.length === 0) {
+            await this.loadProducts();
+        }
         const product = this.products.find(p => p.id === id);
         if (!product) {
             console.log(`Product with id ${id} not found to get`);
@@ -63,18 +68,24 @@ class ProductManager {
         return product;
     }
 
-    deleteProduct(id) {
+    async deleteProduct(id) {
+        if (this.products.length === 0) {
+            await this.loadProducts();
+        }
         const productIndex = this.products.findIndex(p => p.id === id);
         if (productIndex === -1) {
             console.log(`Product with ID ${id} not found`);
             return;
         }
         this.products.splice(productIndex, 1);
-        this.saveProducts();
+        await this.saveProducts();
         console.log(`Product with ID ${id} deleted`);
     }
 
-    updateProduct(id, title, description, price, thumbnail, code, stock) {
+    async updateProduct(id, title, description, price, thumbnail, code, stock) {
+        if (this.products.length === 0) {
+            await this.loadProducts();
+        }
         const productIndex = this.products.findIndex(p => p.id === id);
         if (productIndex === -1) {
             console.log(`Product with ID ${id} not found`);
@@ -88,7 +99,7 @@ class ProductManager {
         product.code = code || product.code;
         product.stock = stock || product.stock;
 
-        this.saveProducts();
+        await this.saveProducts();
         console.log(`Product with ID ${id} updated`);
     }
 }

@@ -1,59 +1,52 @@
-import express from "express";
-import ProductManager from "./productManager.js";
+import express from 'express';
+import ProductManager from './ProductManager.js';
 
-const port = process.env.PORT || 8080;
 const app = express();
+const port = process.env.PORT || 8080;
 
-app.use(express.json());
-
-app.get("/", (req, res) => {
-    res.send("Hola mundo! 🌍");
-});
-
+// Crear una instancia de ProductManager
 const productManager = new ProductManager();
 
-app.get("/products", async (req, res) => {
+// Ruta para obtener productos
+app.get('/products', async (req, res) => {
+    const { limit } = req.query;
+
     try {
-        const { limit } = req.query;
-        const allProducts = await productManager.getProducts();
+        // Obtener todos los productos o limitar el número de resultados
+        const products = await productManager.getProducts();
+        const limitedProducts = limit ? products.slice(0, limit) : products;
 
-        if (!limit) {
-            return res.send({ success: true, data: allProducts });
-        }
-
-        const limitNumber = parseInt(limit, 10);
-        if (isNaN(limitNumber) || limitNumber < 1) {
-            return res.status(400).send({ success: false, error: "Invalid limit parameter" });
-        }
-
-        const productLimit = allProducts.slice(0, limitNumber);
-        res.send({ success: true, data: productLimit });
+        res.json({ products: limitedProducts });
     } catch (error) {
-        res.status(500).send({ success: false, error: error.message });
+        console.error(error.message);
+        res.status(500).json({ message: 'Error al obtener productos' });
     }
 });
 
-app.get("/products/:id", async (req, res) => {
+
+// Ruta para obtener un producto por ID
+app.get('/products/:pid', async (req, res) => {
+    const { pid } = req.params;
+
     try {
-        const { id } = req.params;
-        const idNumber = parseInt(id, 10);
+        // Obtener todos los productos
+        const products = await productManager.getProducts();
+        // Encontrar el producto por su ID
+        const product = products.find(p => p.id === parseInt(pid));
 
-        if (isNaN(idNumber) || idNumber < 1) {
-            return res.status(400).send({ success: false, error: "Invalid ID parameter" });
-        }
-
-        const product = await productManager.getProductById(idNumber);
         if (!product) {
-            return res.status(404).send({ success: false, error: "Product not found" });
+            res.status(404).json({ message: 'Producto no encontrado' });
+        } else {
+            res.json({ product });
         }
-
-        res.send({ success: true, data: product });
     } catch (error) {
-        res.status(500).send({ success: false, error: error.message });
+        console.error(error.message);
+        res.status(500).json({ message: 'Error al obtener producto por ID' });
     }
 });
 
 
+// Iniciar el servidor
 app.listen(port, () => {
-    console.log(`Server listening on port http://localhost:${port}`);
+    console.log(`Servidor en funcionamiento en http://localhost:${port}`);
 });
