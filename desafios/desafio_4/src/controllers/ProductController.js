@@ -54,7 +54,7 @@ class ProductController {
     }
 
     createProduct = async (req, res) => {
-        const { name, description, code, price, stock, category } = req.body;
+        const { name, description, code, price, stock, category, thumbnails } = req.body;
         const products = await this.readProducts();
         const newProduct = {
             id: nanoid(),
@@ -65,12 +65,13 @@ class ProductController {
             stock,
             category,
             status: true,
-            thumbnails: []
+            thumbnails: ["/img/ajo.jpg"]
         };
         products.push(newProduct);
         await this.writeProducts(products);
-        req.io.emit('new-product', newProduct);
-        res.status(201).json(newProduct);
+        // Emitir un evento para todos los clientes de WebSockets.
+        req.io.emit('newProduct', newProduct);
+        res.redirect('/realtimeproducts');
     }
 
     updateProduct = async (req, res) => {

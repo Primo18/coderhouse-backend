@@ -3,7 +3,7 @@
     <!-- Formulario para agregar un nuevo producto -->
     <div id="add-product-form">
         <h2>Agregar nuevo producto</h2>
-        <form id="new-product-form">
+        <form id="new-product-form" method="post" action="/api/products">
             <label for="name">Nombre:</label>
             <input type="text" id="name" name="name" required>
 
@@ -21,8 +21,7 @@
 
             <label for="thumbnail">URL del Thumbnail:</label>
             <input type="text" id="thumbnail" name="thumbnail" required>
-
-            <button type="submit">Agregar Producto</button>
+            <button type="submit" onclick="addProduct(event)">Agregar Producto</button>
         </form>
     </div>
     <!-- Lista de productos -->
@@ -34,7 +33,7 @@
                     <img src="{{this.thumbnails.[0]}}" alt="{{this.name}}">
                 </div>
                 <h2>{{this.name}}</h2>
-                <button class="btn-delete" data-id="{{this.id}}">Eliminar</button>
+                <button class="btn-delete" onclick="deleteProduct('{{this.id}}')">Eliminar</button>
             </li>
             {{/each}}
         </ul>

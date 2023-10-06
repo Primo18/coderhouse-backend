@@ -1,18 +1,5 @@
 [
   {
-    "id": "1",
-    "name": "Manzana",
-    "description": "Manzana roja fresca",
-    "code": "MAN001",
-    "price": 1.5,
-    "status": true,
-    "stock": 100,
-    "category": "Frutas",
-    "thumbnails": [
-      "/img/manzanas.png"
-    ]
-  },
-  {
     "id": "2",
     "name": "Banana",
     "description": "Bananas frescas",
@@ -23,32 +10,6 @@
     "category": "Frutas",
     "thumbnails": [
       "/img/platano.jpg"
-    ]
-  },
-  {
-    "id": "3",
-    "name": "Naranja",
-    "description": "Naranjas jugosas",
-    "code": "NAR001",
-    "price": 1.2,
-    "status": true,
-    "stock": 80,
-    "category": "Frutas",
-    "thumbnails": [
-      "/img/naranja.jpg"
-    ]
-  },
-  {
-    "id": "4",
-    "name": "Fresa",
-    "description": "Fresas dulces",
-    "code": "FRE001",
-    "price": 2,
-    "status": true,
-    "stock": 50,
-    "category": "Frutas",
-    "thumbnails": [
-      "/img/frutilla.jpg"
     ]
   },
   {
@@ -127,6 +88,18 @@
     "category": "Verduras",
     "thumbnails": [
       "/img/limon.jpg"
+    ]
+  },
+  {
+    "id": "x4bR8LgTAiW1pTdvp4d7a",
+    "name": "2",
+    "description": "2",
+    "price": "2",
+    "stock": "2",
+    "category": "2",
+    "status": true,
+    "thumbnails": [
+      "/img/ajo.jpg"
     ]
   }
 ]

@@ -58,36 +58,20 @@ app.use('/', viewsRouter);
 io.on("connection", (socket) => {
     console.log("New connection", socket.id);
 
-    // Escuchar el evento 'new-product'
-    socket.on("new-product", async (newProduct) => {
-        console.log("New product:", newProduct);
-        try {
-            const products = await productController.readProducts();
-            if (!products) {
-                throw new Error("No se pudieron obtener los productos");
-            }
-            products.push(newProduct);
-            await productController.writeProducts(products);
-            io.sockets.emit("new-product", newProduct);
-
-        } catch (error) {
-            console.error("Error creating product:", error);
-        }
-    });
-
-    // Escuchar el evento 'delete-product'
-    socket.on("delete-product", async (productId) => {
+    socket.on("deleteProduct", async (productId) => {
         console.log("Delete product with ID:", productId);
         try {
             const deletedProduct = await productController.deleteProductSocket(productId);
             if (!deletedProduct) {
                 throw new Error("No se pudo eliminar el producto");
             }
-            io.sockets.emit("delete-product", productId);
-
         } catch (error) {
             console.error("Error deleting product:", error);
         }
+    });
+
+    socket.on('disconnect', () => {
+        console.log('Client disconnected');
     });
 
 });
