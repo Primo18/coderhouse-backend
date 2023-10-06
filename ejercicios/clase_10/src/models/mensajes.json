@@ -1,0 +1,35 @@
+[
+	{
+		"mensaje": "Hola, ¿cómo estás?"
+	},
+	{
+		"mensaje": "Estoy aprendiendo Node.js"
+	},
+	{
+		"mensaje": "¡Eso suena emocionante!"
+	},
+	{
+		"mensaje": "Sí, lo es. ¿Y tú qué haces?"
+	},
+	{
+		"mensaje": "Estoy aquí para ayudar a los estudiantes de Node.js"
+	},
+	{
+		"mensaje": "nuevo mensaje"
+	},
+	{
+		"mensaje": "otro mensaje"
+	},
+	{
+		"mensaje": "test"
+	},
+	{
+		"mensaje": "test 2"
+	},
+	{
+		"mensaje": "holaa"
+	},
+	{
+		"mensaje": "Daniel López"
+	}
+]
