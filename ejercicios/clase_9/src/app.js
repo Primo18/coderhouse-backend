@@ -2,9 +2,14 @@ import express from 'express';
 import handlebars from 'express-handlebars';
 import path from 'path';
 import __dirname from './utils.js';
+import viewRoutes from './routes/views.routes.js';
 
 const app = express();
 const port = 3000;
+
+// Agregar middleware para analizar el cuerpo de las peticiones
+app.use(express.json());  // para peticiones tipo application/json
+app.use(express.urlencoded({ extended: true }));  // para peticiones tipo application/x-www-form-urlencoded
 
 // Handlebars configuration
 app.engine('handlebars', handlebars.engine());
@@ -52,24 +57,25 @@ const users = [
     }
 ];
 
-
 // Routes
-app.get('/', (req, res) => {
-    const data = {
-        title: 'Home',
-        name: 'John',
-        lastName: 'Doe',
-        age: 25,
-        isMale: true,
-        hobbies: ['Reading', 'Coding', 'Playing'],
-        address: {
-            street: 'Main St',
-            city: 'Boston',
-            state: 'MA'
-        }
-    };
-    res.render('index', data);
-});
+// app.get('/', (req, res) => {
+//     const data = {
+//         title: 'Home',
+//         name: 'John',
+//         lastName: 'Doe',
+//         age: 25,
+//         isMale: true,
+//         hobbies: ['Reading', 'Coding', 'Playing'],
+//         address: {
+//             street: 'Main St',
+//             city: 'Boston',
+//             state: 'MA'
+//         }
+//     };
+//     res.render('index', data);
+// });
+
+app.use('/', viewRoutes);
 
 // Start server
 app.listen(port, () => {

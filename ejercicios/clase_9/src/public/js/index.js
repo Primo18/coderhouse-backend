@@ -1,0 +1,1 @@
+console.log('Hola! Estoy ejecutando un script desde una plantilla Handlebars')
