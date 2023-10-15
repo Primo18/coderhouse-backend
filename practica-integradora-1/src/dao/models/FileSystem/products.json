@@ -1,0 +1,132 @@
+[
+  {
+    "id": "1",
+    "name": "Manzana",
+    "description": "Manzana roja fresca",
+    "code": "MAN001",
+    "price": 1.5,
+    "status": true,
+    "stock": 100,
+    "category": "Frutas",
+    "thumbnails": [
+      "/img/manzanas.png"
+    ]
+  },
+  {
+    "id": "2",
+    "name": "Banana",
+    "description": "Bananas frescas",
+    "code": "BAN001",
+    "price": 1,
+    "status": true,
+    "stock": 150,
+    "category": "Frutas",
+    "thumbnails": [
+      "/img/platano.jpg"
+    ]
+  },
+  {
+    "id": "3",
+    "name": "Naranja",
+    "description": "Naranjas jugosas",
+    "code": "NAR001",
+    "price": 1.2,
+    "status": true,
+    "stock": 80,
+    "category": "Frutas",
+    "thumbnails": [
+      "/img/naranja.jpg"
+    ]
+  },
+  {
+    "id": "4",
+    "name": "Fresa",
+    "description": "Fresas dulces",
+    "code": "FRE001",
+    "price": 2,
+    "status": true,
+    "stock": 50,
+    "category": "Frutas",
+    "thumbnails": [
+      "/img/frutilla.jpg"
+    ]
+  },
+  {
+    "id": "5",
+    "name": "Cebollín",
+    "description": "Cebollín",
+    "code": "CB001",
+    "price": 2.5,
+    "status": true,
+    "stock": 60,
+    "category": "Verduras",
+    "thumbnails": [
+      "/img/cebollin.jpg"
+    ]
+  },
+  {
+    "id": "6",
+    "name": "Mango",
+    "description": "Mangos tropicales",
+    "code": "MAN002",
+    "price": 3,
+    "status": true,
+    "stock": 40,
+    "category": "Frutas",
+    "thumbnails": [
+      "/img/mango.jpg"
+    ]
+  },
+  {
+    "id": "7",
+    "name": "Tomate",
+    "description": "Tomates frescos",
+    "code": "MEL001",
+    "price": 4,
+    "status": true,
+    "stock": 20,
+    "category": "Verduras",
+    "thumbnails": [
+      "/img/tomate.jpg"
+    ]
+  },
+  {
+    "id": "8",
+    "name": "Pomelo",
+    "description": "Pomelos jugosas",
+    "code": "SAN001",
+    "price": 5,
+    "status": true,
+    "stock": 15,
+    "category": "Frutas",
+    "thumbnails": [
+      "/img/pomelo.jpg"
+    ]
+  },
+  {
+    "id": "9",
+    "name": "Piña",
+    "description": "Piñas dulces",
+    "code": "PIN001",
+    "price": 3.5,
+    "status": true,
+    "stock": 30,
+    "category": "Frutas",
+    "thumbnails": [
+      "/img/pina.jpg"
+    ]
+  },
+  {
+    "id": "10",
+    "name": "Limón",
+    "description": "Limón maduras",
+    "code": "PAP001",
+    "price": 4.5,
+    "status": true,
+    "stock": 25,
+    "category": "Verduras",
+    "thumbnails": [
+      "/img/limon.jpg"
+    ]
+  }
+]
