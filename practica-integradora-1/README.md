@@ -74,8 +74,6 @@ curl -X POST http://localhost:8080/api/carts/add
 ```
 ![Alt text](image-6.png)
 
-### /api/carts/remove
-
 
 ### /api/messages
 
@@ -84,6 +82,7 @@ curl -X POST http://localhost:8080/api/carts/add
 ```bash
 curl -X GET http://localhost:8080/api/messages
 ```
+![Alt text](image-9.png)
 
 * **POST**: Add a new message
 
@@ -106,6 +105,7 @@ curl -X GET http://localhost:8080/api/messages/:user
 ```bash
 curl -X GET http://localhost:8080/api/products
 ```
+![Alt text](image-10.png)
 
 * **POST**: Add a new product
 
