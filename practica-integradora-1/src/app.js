@@ -3,6 +3,7 @@ import __dirname from './utils.js';
 import ProductController from './controllers/ProductController.js';
 import productsRoutes from './routes/products.routes.js';
 import cartsRoutes from './routes/carts.routes.js';
+import messagesRoutes from './routes/messages.routes.js';
 import path from "path";
 import handlebars from "express-handlebars";
 import viewsRouter from "./routes/views.routes.js";
@@ -66,7 +67,9 @@ app.use((req, res, next) => {
 // Routes
 app.use('/api/products', productsRoutes);
 app.use('/api/carts', cartsRoutes);
+app.use('/api/messages', messagesRoutes);
 app.use('/', viewsRouter);
+
 
 io.on("connection", (socket) => {
     console.log("New connection", socket.id);

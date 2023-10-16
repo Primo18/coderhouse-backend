@@ -25,3 +25,9 @@ export const renderHomePage = async (req, res) => {
 export const renderRealTimeProducts = async (req, res) => {
     await renderPage(req, res, 'realTimeProducts', 'Real Time Products', 'realTimeProducts.css');
 };
+
+export const renderChat = async (req, res) => {
+    await renderPage(req, res, 'chat', 'Chat', 'chat.css');
+};
+
+

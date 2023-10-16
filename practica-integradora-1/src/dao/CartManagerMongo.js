@@ -46,7 +46,10 @@ class CartManagerMongo {
         return this.getCartById(cartId);
     }
 
-
+    // Obtener todos los carritos
+    async getAllCarts() {
+        return await Cart.find();
+    }
 }
 
 export default CartManagerMongo;

@@ -8,7 +8,7 @@ cartsRouter.get("/", cartController.getAllCarts);
 cartsRouter.get("/:id", cartController.getCartById);
 cartsRouter.post("/", cartController.createCart);
 cartsRouter.post("/add", cartController.addProductToCart);
-cartsRouter.post("/remove", cartController.removeProductFromCart);
+cartsRouter.delete("/remove", cartController.removeProductFromCart);
 
 export default cartsRouter;
 
