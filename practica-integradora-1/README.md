@@ -28,7 +28,7 @@ npm install
 1. Inicia el servidor:
 
 ```bash
-npm run dev
+npm start
 ```
 
 2. Abre el navegador en la dirección http://localhost:8080
