@@ -1,0 +1,17 @@
+{
+  "name": "clase_17",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node src/app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mongoose": "^7.6.3",
+    "mongoose-paginate-v2": "^1.7.4"
+  }
+}
