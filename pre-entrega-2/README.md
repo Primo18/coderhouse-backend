@@ -36,6 +36,16 @@ npm start
 
 ## Ejemplos de uso de la API 
 
+### Agregar un producto
+![01  add product](img/01.%20add%20product.png)
+### Obtener todos los productos
+![02  get products](img/02.%20get%20products.png)
+### Mostar el carrito
+![03  cart](img/03.%20cart.png)
+### Obtener productos por la API
+![04  products API](img/04.%20products%20API.png)
+### Filtrar productos 
+![05  filtro productos](img/05.%20filtro%20productos.png)
 
 
 ## Endpoints de carts.routes.js
