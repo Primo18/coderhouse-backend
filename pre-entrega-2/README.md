@@ -39,7 +39,7 @@ npm start
 ### Agregar un producto
 ![01  add product](img/01.%20add%20product.png)
 ### Obtener todos los productos
-![02  get products](img/02.%20get%20products.png)
+![02 products](img/02.%20products.png)
 ### Mostar el carrito
 ![03  cart](img/03.%20cart.png)
 ### Obtener productos por la API
