@@ -52,7 +52,7 @@ const startServer = async () => {
 
         app.use('/', viewsRouter);
 
-        app.listen(8080, () => console.log(`Server running on http://localhost:8080`));
+        app.listen(3000, () => console.log(`Server running on http://localhost:3000`));
     } catch (error) {
         console.error('Error connecting to MongoDB or starting the server:', error);
     }
