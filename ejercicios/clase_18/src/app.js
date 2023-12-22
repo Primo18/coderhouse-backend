@@ -5,6 +5,9 @@ import cookieParser from 'cookie-parser';
 const app = express();
 const PORT = 3000;
 
+console.log(process.cwd());
+
+
 // Middlewares
 app.use(cookieParser("secret"));
 app.use(express.urlencoded({ extended: true }));
@@ -16,6 +19,7 @@ app.use(session({
     saveUninitialized: true,
     cookie: { secure: false } // Usar true en caso de HTTPS
 }));
+
 
 // app.get('/setCookie', (req, res) => {
 //     res.cookie('string', 'cookie', { expires: new Date(Date.now() + 900000) });
@@ -69,31 +73,30 @@ app.use(session({
 // app.get('/getCookie', (req, res) => {
 //     const cookies = req.cookies;
 //     console.log(cookies);
-//     res.send('Check console for cookies');
+//     res.send(`Cookies: ${JSON.stringify(cookies)}`);
 // });
 
-// app.get('/session', (req, res) => {
-//     if (req.session.views) {
-//         req.session.views++;
-//         res.send(`You have visited this page ${req.session.views} times`);
-//     } else {
-//         req.session.views = 1;
-//         res.send('Welcome to this page for the first time!');
-//     }
-// });
+app.get('/session', (req, res) => {
+    if (req.session.views) {
+        req.session.views++;
+        res.send(`You have visited this page ${req.session.views} times`);
+    } else {
+        req.session.views = 1;
+        res.send('Welcome to this page for the first time!');
+    }
+});
 
-// app.get('/session/destroy', (req, res) => {
-//     req.session.destroy();
-//     res.send('Session destroyed');
-// });
-
+app.get('/session/destroy', (req, res) => {
+    req.session.destroy();
+    res.send('Session destroyed');
+});
 
 app.post('/login', (req, res) => {
     const { username, password } = req.body;
     // Aquí se haría la autenticación real, consultando a una base de datos, por ejemplo.
-    if (username === 'admin' && password === 'password') {
+    if (username && password === 'password') {
         req.session.isAuthenticated = true;
-        req.session.user = { username: 'admin' };
+        req.session.user = { username };
         res.send('Logged in');
     } else {
         res.send('Invalid credentials');
@@ -110,12 +113,13 @@ app.get('/dashboard', (req, res) => {
 
 // Middleware para admin
 const isAdmin = (req, res, next) => {
-    if (req.session.user.username === 'admin') {
+    if (req.session.user && req.session.user.username === 'admin') {
         next();
     } else {
         res.send('You are not authorized to view this page');
     }
 };
+
 
 app.get('/admin', isAdmin, (req, res) => {
     res.send('Hello admin, welcome to your dashboard');
@@ -130,8 +134,6 @@ app.get('/logout', (req, res) => {
         res.send('Logged out');
     });
 });
-
-
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
