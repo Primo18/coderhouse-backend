@@ -5,13 +5,13 @@ body {
     padding: 20px;
 }
 
-.home-container {
-    max-width: 600px;
+.profile-container {
+    max-width: 400px;
     margin: 30px auto;
     padding: 20px;
     background: #fff;
     border-radius: 5px;
-    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
@@ -23,11 +23,15 @@ p {
     margin-bottom: 10px;
 }
 
-a {
-    color: #007bff;
+.logout-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #dc3545;
+    color: #fff;
     text-decoration: none;
+    border-radius: 5px;
 }
 
-a:hover {
-    text-decoration: underline;
+.logout-button:hover {
+    background-color: #c82333;
 }

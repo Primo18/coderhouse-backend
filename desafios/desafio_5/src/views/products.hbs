@@ -1,0 +1,35 @@
+<div>
+    <h1>Ecommerce Frutas & Verduras</h1>
+    <!-- Paginación -->
+    <div class="pagination">
+        {{#if pagination.hasPrevPage}}
+        <a href="?page={{pagination.prevPage}}">Anterior</a>
+        {{/if}}
+
+        Página {{pagination.page}} de {{pagination.totalPages}}
+
+        {{#if pagination.hasNextPage}}
+        <a href="?page={{pagination.nextPage}}">Siguiente</a>
+        {{/if}}
+    </div>
+
+    <div id="products">
+        <ul id="products-list">
+            {{#each products}}
+            <li>
+                <img src="{{this.thumbnails.[0]}}" alt="{{this.name}}">
+                <h2>{{this.name}}</h2>
+                <p> {{this.description}}</p>
+                <p>Precio: ${{this.price}}</p>
+                <p>Stock: {{this.stock}}</p>
+                <button class="btn btn-primary" data-id="{{this.id}}">Agregar al carrito</button>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+
+
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/products.js"></script>

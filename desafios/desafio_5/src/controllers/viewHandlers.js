@@ -41,9 +41,8 @@ const renderPage = async (req, res, viewName, title, style) => {
     }
 };
 
-
 export const renderHomePage = async (req, res) => {
-    await renderPage(req, res, 'home', 'Home', 'home.css');
+    await renderPage(req, res, 'products', 'products', 'products.css');
 };
 
 export const renderRealTimeProducts = async (req, res) => {
@@ -53,7 +52,6 @@ export const renderRealTimeProducts = async (req, res) => {
 export const renderChat = async (req, res) => {
     await renderPage(req, res, 'chat', 'Chat', 'chat.css');
 };
-
 
 export const renderCartPage = async (req, res) => {
     try {
@@ -69,6 +67,3 @@ export const renderCartPage = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
-
-
-
