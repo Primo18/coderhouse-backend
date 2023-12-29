@@ -7,7 +7,7 @@ const cartManagerMongo = new CartManagerMongo();
 const renderPage = async (req, res, viewName, title, style) => {
     try {
         const { limit = 10, page = 1, sort, query } = req.query;  // Tomar opciones desde la solicitud
-
+        const { first_name, last_name, email, age, role } = req.session.user;
         const products = await productManagerMongo.getAllProducts({
             limit: parseInt(limit),
             page: parseInt(page),
@@ -32,7 +32,7 @@ const renderPage = async (req, res, viewName, title, style) => {
                 nextLink: products.nextLink
             },
             title,
-            style
+            style, first_name, last_name, email, age, role
         });
 
     } catch (error) {

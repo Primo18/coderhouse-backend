@@ -1,5 +1,11 @@
 <div>
     <h1>Ecommerce Frutas & Verduras</h1>
+    {{!-- Profile Welcome--}}
+    <div class="profile-container">
+        <h2>Bienvenido {{first_name}} {{last_name}}</h2>
+        <p><strong>Rol:</strong> {{role}}</p>
+        <a href="/logout" class="logout-button">Cerrar Sesión</a>
+    </div>
     <!-- Paginación -->
     <div class="pagination">
         {{#if pagination.hasPrevPage}}
@@ -27,8 +33,6 @@
             {{/each}}
         </ul>
     </div>
-
-
 </div>
 
 <script src="/socket.io/socket.io.js"></script>
