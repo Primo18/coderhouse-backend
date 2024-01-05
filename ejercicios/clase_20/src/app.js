@@ -1,5 +1,5 @@
 import express from "express";
-import db from "./db.js";
+import db from "./config/db.js";
 import __dirname from "./utils.js";
 import path from "path";
 import session from "express-session";
@@ -7,6 +7,8 @@ import cookieParser from "cookie-parser";
 import MongoStore from "connect-mongo";
 import indexRouter from "./routes/indexRouter.js";
 import { engine } from "express-handlebars";
+import passport from "passport";
+import initPassport from "./config/passport.config.js";
 
 const app = express();
 const PORT = 3000;
@@ -27,7 +29,7 @@ app.engine("hbs", engine({ extname: ".hbs", defaultLayout: "main" }));
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "views"));
 
-// Middleware
+// Middlewares
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookieParser());
@@ -41,7 +43,10 @@ app.use(
             maxAge: 6000000
         }
     })
-)
+);
+app.use(passport.initialize());
+app.use(passport.session());
+initPassport();
 
 // Routes
 app.use("/", indexRouter);
