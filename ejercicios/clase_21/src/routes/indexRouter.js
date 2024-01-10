@@ -6,9 +6,7 @@ import passport from "passport";
 const router = Router();
 
 // Home page
-router.get("/", (req, res) => {
-    res.render("home", { title: "Home", style: "home.css", user: req.session.user });
-});
+router.get("/", authController.getHome);
 
 // Profile page
 router.get("/profile", ensureAuthenticated, authController.getProfile);
@@ -24,13 +22,15 @@ router.get("/register", redirectIfAuthenticated, authController.showRegisterForm
 // Register page with passport
 router.post("/api/register", redirectIfAuthenticated, passport.authenticate("signup", { failureRedirect: "/register" }), authController.showLoginForm);
 
-
 // Login page
 router.get("/login", redirectIfAuthenticated, authController.showLoginForm);
 // router.post("/api/login", redirectIfAuthenticated, authController.login);
 
 // Login page with passport
-router.post("/api/login", redirectIfAuthenticated, passport.authenticate("login", { failureRedirect: "/login" }), authController.getProfile);
+router.post("/api/login", redirectIfAuthenticated, passport.authenticate("login", {
+    successRedirect: "/profile",
+    failureRedirect: "/login"
+}), authController.getProfile);
 
 // Change password page
 router.get("/change-password", ensureAuthenticated, authController.showChangePasswordForm);

@@ -1,6 +1,13 @@
 import User from '../models/User.js';
 import { hashPassword, comparePassword } from '../utils.js';
 
+export const getHome = (req, res) => {
+    // Si req.user es un documento de Mongoose, conviértelo en un objeto simple.
+    const userObj = req.user ? req.user.toObject() : null;
+    res.render('home', { title: 'Home', style: 'home.css', user: userObj });
+};
+
+
 export const getProfile = (req, res) => {
     const { first_name, last_name, email, age, role } = req.user;
     res.render('profile', {
@@ -45,7 +52,7 @@ export const login = async (req, res) => {
         if (!isMatch) {
             return res.redirect('/login');
         }
-        req.session.user = user;
+        req.user = user;
         res.redirect('/profile');
     } catch (error) {
         console.error('Login error:', error);
