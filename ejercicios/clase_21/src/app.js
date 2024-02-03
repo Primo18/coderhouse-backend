@@ -6,6 +6,7 @@ import session from "express-session";
 import cookieParser from "cookie-parser";
 import MongoStore from "connect-mongo";
 import indexRouter from "./routes/indexRouter.js";
+import sessionsRouter from "./routes/sessionsRouter.js";
 import { engine } from "express-handlebars";
 import passport from "passport";
 import initPassport from "./config/passport.config.js";
@@ -50,6 +51,7 @@ initPassport();
 
 // Routes
 app.use("/", indexRouter);
+app.use("/api/sessions", sessionsRouter);
 
 app.listen(PORT, () => {
     console.log(`Server is running at http://localhost:${PORT}`);

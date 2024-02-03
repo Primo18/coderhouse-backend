@@ -1,9 +1,14 @@
 import passport from 'passport';
 import passportLocal from 'passport-local';
+import GitHubStrategy from 'passport-github2';
 import userService from '../models/User.js';
 import { hashPassword, comparePassword } from '../utils.js';
 
 const LocalStrategy = passportLocal.Strategy;
+const GITHUB_CLIENT_ID = "Iv1.edeeaa849b214240";
+const GITHUB_CLIENT_SECRET = "a36de3fe25eba801faa2a436cf19cbbc85baaa4a";
+const GITHUB_CALLBACK_URL = "http://localhost:3000/api/sessions/githubcallback";
+
 
 // Serialize user
 passport.serializeUser((user, done) => {
@@ -79,6 +84,36 @@ const initPassport = () => {
             done(error);
         }
     }));
+
+    // Login user with GitHub
+    passport.use('github', new GitHubStrategy({
+        clientID: GITHUB_CLIENT_ID,
+        clientSecret: GITHUB_CLIENT_SECRET,
+        callbackURL: GITHUB_CALLBACK_URL
+    },
+        async (accessToken, refreshToken, profile, done) => {
+            try {
+                console.log(profile);
+                // Buscar el usuario en la base de datos por su email
+                let user = await userService.findOne({ email: profile._json.email });
+
+                // Si el usuario no existe, crear un nuevo usuario
+                if (!user) {
+                    user = new userService({
+                        first_name: profile._json.name,
+                        email: profile._json.email,
+                        password: ""
+                    });
+                    await user.save();
+                }
+
+                // Devolver el usuario
+                return done(null, user);
+            } catch (error) {
+                done(error);
+            }
+        }
+    ));
 
 };
 

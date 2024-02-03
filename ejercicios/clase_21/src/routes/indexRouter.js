@@ -11,7 +11,6 @@ router.get("/", authController.getHome);
 // Profile page
 router.get("/profile", ensureAuthenticated, authController.getProfile);
 
-
 // Logout
 router.get("/logout", ensureAuthenticated, authController.logout);
 
