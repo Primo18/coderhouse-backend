@@ -3,6 +3,18 @@ import passportLocal from 'passport-local';
 import GitHubStrategy from 'passport-github2';
 import userService from '../models/User.js';
 import { hashPassword, comparePassword } from '../utils.js';
+import { Strategy as JWTStrategy, ExtractJwt } from 'passport-jwt';
+
+const jwtOptions = {
+    jwtFromRequest: ExtractJwt.fromExtractors([(req) => {
+        let token = null;
+        if (req && req.cookies) {
+            token = req.cookies['token']; // Asegúrate de reemplazar 'nombreDeTuCookie' con el nombre real de tu cookie
+        }
+        return token;
+    }]),
+    secretOrKey: 'myprivatekey'
+};
 
 const LocalStrategy = passportLocal.Strategy;
 const GITHUB_CLIENT_ID = "Iv1.edeeaa849b214240";
@@ -56,7 +68,7 @@ const initPassport = () => {
         }
     }));
 
-    // Login user
+    // Login user with email and password (Local Strategy)
     passport.use('login', new LocalStrategy({
         usernameField: 'email',
         passwordField: 'password'
@@ -115,6 +127,23 @@ const initPassport = () => {
         }
     ));
 
+    // Login user with JWT
+    passport.use(new JWTStrategy(jwtOptions, async (jwtPayload, done) => {
+        try {
+            // Buscar el usuario en la base de datos por su id
+            const user = await userService.findById(jwtPayload.id);
+
+            // Si el usuario no existe, devolver un mensaje de error
+            if (!user) {
+                return done(null, false, { message: 'User not found' });
+            }
+
+            // Si el usuario existe, devolver el usuario
+            return done(null, user);
+        } catch (error) {
+            done(error);
+        }
+    }));
 };
 
 export default initPassport;
