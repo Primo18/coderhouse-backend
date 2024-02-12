@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import authMiddleware from '../middlewares/authMiddleware.js';
+import handlePolicies from '../middlewares/handlePolicies.js';
 
 export default class CustomRouter {
     constructor() {
@@ -13,26 +14,27 @@ export default class CustomRouter {
     }
 
     init() {
-        // Aquí se definen las rutas de la aplicación usando los métodos get, post, etc. de la instancia de Router
+        // La lógica de inicialización de las rutas se definirá en las clases derivadas
     }
 
-    // Método applyRoute para evitar repetir código en get, post, put, etc.
-    applyRoute(method, path, requireAuth, handlers) {
-        const middleware = [requireAuth ? authMiddleware : null].filter(Boolean);
+    // Método applyRoute ajustado para incluir handlePolicies
+    applyRoute(method, path, policies, handlers) {
+        // Se asume que 'policies' es un array de strings, por ejemplo ['USER', 'ADMIN']
         const wrappedHandlers = handlers.map(h => this.applyCallback(h));
-        this.router[method](path, ...middleware, ...wrappedHandlers);
+        this.router[method](path, handlePolicies(policies), ...wrappedHandlers);
     }
 
-    get(path, requireAuth = false, ...handlers) {
-        this.applyRoute('get', path, requireAuth, handlers);
+    // Ajusta los métodos para recibir un arreglo de políticas en lugar de un booleano 'requireAuth'
+    get(path, policies = [], ...handlers) {
+        this.applyRoute('get', path, policies, handlers);
     }
 
-    post(path, requireAuth = false, ...handlers) {
-        this.applyRoute('post', path, requireAuth, handlers);
+    post(path, policies = [], ...handlers) {
+        this.applyRoute('post', path, policies, handlers);
     }
 
-    put(path, requireAuth = false, ...handlers) {
-        this.applyRoute('put', path, requireAuth, handlers);
+    put(path, policies = [], ...handlers) {
+        this.applyRoute('put', path, policies, handlers);
     }
 
     // Y así sucesivamente para DELETE, etc.
